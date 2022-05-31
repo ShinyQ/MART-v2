@@ -17,8 +17,10 @@ class SuperUserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->guard('api')->user()->role == 'superuser'){
-            return $next($request);
+        if (!empty(auth()->guard('api')->user())){
+            if (auth()->guard('api')->user()->role == 'superuser') {
+                return $next($request);
+            }
         }
 
         return Api::apiRespond(401);
