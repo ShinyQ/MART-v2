@@ -24,7 +24,19 @@ class FamilyMemberRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'family_card_id' => ['required'],
+            'nama' => ['required', 'string'],
+            'nik' => ['required', 'string'],
+            'tanggal_lahir' => ['required'],
+            'tempat_lahir' => ['required'],
+            'jenis_kelamin' => ['required', 'string'],
+            'agama' => ['required', 'string'],
+            'pendidikan' => ['required', 'string'],
+            'kabupaten_kota' => ['required', 'string'],
+            'pekerjaan' => ['required', 'string'],
+            'golongan_darah' => ['required', 'string'],
+            'isFamilyHead' => ['required'],
+            'family_card_id' => ['required']
         ];
     }
 }

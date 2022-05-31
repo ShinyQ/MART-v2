@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Api;
 use Illuminate\Http\Request;
 
 class SuperUserMiddleware
@@ -16,6 +17,10 @@ class SuperUserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        if(auth()->guard('api')->user()->role == 'superuser'){
+            return $next($request);
+        }
+
+        return Api::apiRespond(401);
     }
 }

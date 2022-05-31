@@ -6,6 +6,7 @@ use App\Http\Requests\FamilyMemberRequest;
 use App\Models\FamilyMember;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Exception;
 
 class FamilyMemberController extends Controller
 {
