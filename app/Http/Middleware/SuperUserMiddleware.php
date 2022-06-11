@@ -17,12 +17,22 @@ class SuperUserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!empty(auth()->guard('api')->user())){
-            if (auth()->guard('api')->user()->role == 'superuser') {
-                return $next($request);
+        if ($request->route()->getPrefix() === 'api') {
+            if (!empty(auth()->guard('api')->user())) {
+                if (auth()->guard('api')->user()->role == 'superuser') {
+                    return $next($request);
+                }
+            }
+
+            return Api::apiRespond(401);
+        } else {
+            if(session()->has('user')){
+                if(session()->get('user')->role == 'superuser'){
+                    return $next($request);
+                }
             }
         }
 
-        return Api::apiRespond(401);
+        return redirect('/user/login')->with('error', 'Harus Login Dahulu');
     }
 }

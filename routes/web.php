@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Views\UserController;
+use App\Http\Controllers\Views\FamilyCardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/login', [UserController::class, 'view_login']);
+    Route::post('/login', [UserController::class, 'login']);
+    Route::get('/logout', [UserController::class, 'logout']);
+});
+
+Route::group(['prefix' => 'dashboard', 'middleware' => 'superuser'], function () {
+    Route::get('/', function () { $title = 'Dashboard'; return view('index', compact('title')); });
+    Route::get('user', [UserController::class, 'index']);
+    Route::resource('data', FamilyCardController::class);
 });
