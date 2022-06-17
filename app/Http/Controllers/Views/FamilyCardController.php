@@ -12,8 +12,10 @@ class FamilyCardController extends Controller
 {
     public function index()
     {
+
         $title = 'Halaman Data Warga';
-        $family_card = FamilyCard::get();
+        $family_card = FamilyCard::with('family_head')->get();
+
         return view('family_card', compact('family_card', 'title'));
     }
 

@@ -20,4 +20,8 @@ class FamilyCard extends Model
     public function family_members(){
         return $this->hasMany(FamilyMember::class, 'family_card_id', 'nomor');
     }
+
+    public function family_head(){
+        return $this->hasOne(FamilyMember::class, 'family_card_id', 'nomor')->where('isFamilyHead', 1);
+    }
 }
