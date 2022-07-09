@@ -56,7 +56,12 @@
                                 <td>{{ date('d F Y', strtotime($data->tanggal_lahir  )) }}</td>
                                 <td>{{ $data->jenis_kelamin }}</td>
                                 <td>
-                                    <a href="#" data-id="{{ $data->family_card_id }}" class="detail btn btn-outline-primary">
+                                    <a href="#"
+                                       data-id="{{ $data->family_card_id }}"
+                                       class="detail btn btn-outline-primary"
+                                       data-toggle="modal"
+                                       data-target="#detailModal"
+                                    >
                                         Detail
                                     </a>
                                     <a href="data/{{ $data->id }}/edit" class="btn btn-primary">
@@ -128,7 +133,7 @@
                 const id = $(this).data('id');
                 $.ajax({
                     type: 'GET',
-                    url: `{{ url('data') }}/${id}`,
+                    url: `{{ url('api/data') }}/${id}`,
                     success: (res) => {
                         $('#titleModal').html('Detail Kartu Keluarga')
                         $('#nomor').val(res.data.nomor);

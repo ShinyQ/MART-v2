@@ -22,6 +22,7 @@ class FamilyCard extends Model
     }
 
     public function family_head(){
-        return $this->hasOne(FamilyMember::class, 'family_card_id', 'nomor')->where('isFamilyHead', 1);
+        return $this->hasOne(FamilyMember::class, 'family_card_id', 'nomor')->where('isFamilyHead', 1)
+            ->select('family_card_id', 'nik', 'nama');
     }
 }

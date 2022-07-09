@@ -22,7 +22,7 @@ class FamilyCardController extends Controller
     public function index()
     {
         try {
-            $response = FamilyCard::query();
+            $response = FamilyCard::with('family_head');
             $this->response = Api::pagination($response);
         } catch (Exception $e){
             $this->code = 500;

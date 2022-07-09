@@ -96,10 +96,10 @@ class FamilyMemberController extends Controller
         try {
             FamilyMember::findOrFail($id)->delete();
         } catch (Exception $e){
+            $this->code = 500;
+
             if ($e instanceof ModelNotFoundException){
                 $this->code = 404;
-            } else {
-                $this->code = 500;
             }
 
             $this->response = $e->getMessage();
